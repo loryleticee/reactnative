@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
   FlatList,
 } from 'react-native';
 
+import getVelibs from "../service/velib"
+
 export default function ListScreen() {
-  return (
+    const [velibs, setVelibs] = useState([]);
+    useEffect(() => {
+      getVelibs().then(data => {
+        setVelibs(data.records);
+      });
+    }, [])
+
+  console.log(velibs);
+
+    return (
     <FlatList
       style={styles.container}
       renderItem={({ item }) => {
-        return <Text>{item.title}</Text>
+        return <Text>{item.fields.station_name}</Text>
       }}
-      data={[
-        { id: "1", title: "Station 1" },
-        { id: "2", title: "Station 2" },
-        { id: "3", title: "Station 3" },
-        { id: "4", title: "Station 4" },
-      ]}
-      keyExtractor={item => item.id}
+      data={velibs}
+      keyExtractor={item => item.recordid}
     />
   );
 }
