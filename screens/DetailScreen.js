@@ -19,9 +19,6 @@ const DetailScreen = ({navigation}) =>{
     const lat = datas.geo[0];
     const lgt = datas.geo[1];
 
-    console.log("lat", lat);
-    console.log("lgt", lgt);
-
     return (
         <>
                <Text> {datas.station_name}</Text>
@@ -44,7 +41,6 @@ const DetailScreen = ({navigation}) =>{
                     }}>
 
                 </Marker>
-
                 </MapView>
 
         </>
