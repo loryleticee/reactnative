@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   FlatList,
+  AsyncStorage
 } from 'react-native';
 
 import {VelibContext} from '../service/VelibProvider';

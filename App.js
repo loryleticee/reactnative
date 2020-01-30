@@ -4,7 +4,6 @@ import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 import {VelibProvider} from './service/VelibProvider';
 
 const App = () =>{
-    
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
