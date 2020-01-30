@@ -2,10 +2,7 @@ import React from 'react';
 import AppNavigator from './navigation/AppNavigator';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
 
-import {VelibContainer} from './component/container/VelibContainer';
-
 export default function App() {
-  VelibContainer()
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
