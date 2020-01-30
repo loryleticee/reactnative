@@ -1,19 +1,19 @@
 import React from 'react';
 import AppNavigator from './navigation/AppNavigator';
 import { Platform, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {VelibProvider} from './service/VelibProvider';
 
-import {VelibContainer} from './component/container/VelibContainer';
-
-export default function App() {
-  VelibContainer()
+const App = () =>{
+    
   return (
     <View style={styles.container}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      <AppNavigator />
-
+      <VelibProvider>
+        <AppNavigator />
+      </VelibProvider>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
   },
 });
+
+export default App;
 
 // vue recherche
 

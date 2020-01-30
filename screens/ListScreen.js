@@ -1,27 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   StyleSheet,
   Text,
   FlatList,
 } from 'react-native';
 
-export default function ListScreen() {
+import {VelibContext} from '../service/VelibProvider';
+
+const ListScreen = (props) =>{
+    const context = useContext(VelibContext);
+
   return (
     <FlatList
       style={styles.container}
+      data={context.velibs.records}
+      keyExtractor={item => item.recordid}
       renderItem={({ item }) => {
-        return <Text>{item.title}</Text>
+          return <Text onPress={() => {
+              props.navigation.navigate('Details', {
+                  data: item.fields,
+              });
+          }}>{item.fields.station_name}</Text>
       }}
-      data={[
-        { id: "1", title: "Station 1" },
-        { id: "2", title: "Station 2" },
-        { id: "3", title: "Station 3" },
-        { id: "4", title: "Station 4" },
-      ]}
-      keyExtractor={item => item.id}
     />
   );
-}
+};
 
 ListScreen.navigationOptions = {
   title: "Vélibs",
@@ -33,3 +36,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default ListScreen;

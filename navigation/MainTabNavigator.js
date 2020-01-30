@@ -3,12 +3,12 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import ListScreen from '../screens/ListScreen';
 import MapScreen from '../screens/MapScreen';
-import VelibScreen from '../screens/VelibScreen';
-//import velibContainer from '../component/container/ListContainer';
+import DetailScreen from '../screens/DetailScreen';
 
 const ListStack = createStackNavigator(
     {
         Home: ListScreen,
+        Details: DetailScreen,
     }
 );
 
