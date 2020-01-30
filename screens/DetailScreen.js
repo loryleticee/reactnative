@@ -4,25 +4,50 @@ import {
     StyleSheet,
     Text,
     FlatList,
+    View
 } from 'react-native';
 
+import MapView, { Marker } from 'react-native-maps';
+
 import {VelibContext} from '../service/VelibProvider';
-import {View} from "react-native-web";
 
 const DetailScreen = ({navigation}) =>{
 
     const context = useContext(VelibContext);
-    const datas = navigation.getParam('data');
 
-    console.log('COOOOOOO', context);
-    console.log('UTFYIGUO', datas);
+    const datas = navigation.getParam('data');
+    const lat = datas.geo[0];
+    const lgt = datas.geo[1];
+
+    console.log("lat", lat);
+    console.log("lgt", lgt);
 
     return (
-        <View>
-            <Text>
-                {datas}
-            </Text>
-        </View>
+        <>
+               <Text> {datas.station_name}</Text>
+                <MapView
+                    style={styles.container}
+                    region = { {
+                        latitude:lat ,
+                        longitude: lgt,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    showsUserLocation={true}
+                    zoomEnabled={true}
+                    followsUserLocation={true}
+                >
+                <Marker
+                    coordinate = {{
+                        latitude: lat,
+                        longitude: lgt,
+                    }}>
+
+                </Marker>
+
+                </MapView>
+
+        </>
     );
 };
 
@@ -32,7 +57,7 @@ DetailScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.5,
         backgroundColor: '#fff',
     },
 });
