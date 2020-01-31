@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 
 import {
     StyleSheet,
@@ -6,10 +6,23 @@ import {
 } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
+import {VelibContext} from "../service/VelibProvider";
 
 const DetailScreen = ({navigation}) =>{
     //Station informations
     const resort = navigation.getParam('resort');
+    const context = useContext(VelibContext);
+
+    const [favResort, setFavResort] = useState([]);
+
+    const addFav = (resortCode) => {
+      const Resort = context.velibs.records.filter((item) => item.fields.station_code == resortCode);
+      setFavResort(Resort);
+    };
+
+    if(favResort.length > 0) {
+
+    }
 
     return (
       <>
@@ -17,22 +30,23 @@ const DetailScreen = ({navigation}) =>{
       <MapView
         style={styles.container}
         region = {{
-            latitude: resort.geo[0]  ,
-            longitude: resort.geo[1],
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+          latitude: resort.geo[0]  ,
+          longitude: resort.geo[1],
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
         }}
         showsUserLocation={true}
         zoomEnabled={true}
         followsUserLocation={true}
       >
-      <Marker
+        <Marker
           coordinate = {{
-              latitude: resort.geo[0],
-              longitude: resort.geo[1],
+            latitude: resort.geo[0],
+            longitude: resort.geo[1],
           }}>
-      </Marker>
+        </Marker>
       </MapView>
+      <Text  onPress={() => addFav(resort.station_code)}> ⭐ </Text>
       </>
     );
 };

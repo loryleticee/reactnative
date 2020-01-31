@@ -16,7 +16,7 @@ const ListScreen = (props) =>{
       data={context.velibs.records}
       keyExtractor={item => item.recordid}
       renderItem={({ item }) => {
-        return <Text onPress={() => {
+        return <Text style={styles.item} onPress={() => {
           props.navigation.navigate('Details', {
               resort: item.fields,
           });
@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  item: {
+    alignItems : 'center' ,
+    justifyContent : 'center' ,
+
   },
 });
 

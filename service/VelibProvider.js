@@ -27,7 +27,7 @@ export const VelibProvider = ({ children }) => {
       }
     );
 
-    const link = url + '&geofilter.distance='
+    const link = url + '&rows=200&geofilter.distance='
       + position.coords.latitude + ','
       + position.coords.longitude + ','
       + RADIUS_DISTANCE;
