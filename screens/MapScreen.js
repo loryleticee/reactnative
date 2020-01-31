@@ -1,29 +1,36 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import {Marker, MapView} from "react-native-maps";
+import  MapView, {Marker} from "react-native-maps";
+import {VelibContext} from "../service/VelibProvider";
 
 export default function MapScreen() {
 
-  const markers = {};
+  const velibContext = useContext(VelibContext);
+  const localPos = velibContext.userPlace;
 
   return (
     <View style={styles.container}>
-        <MapView
-            initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-        >
-          {/*markers.map(marker => (
-              <Marker
-                  coordinate={marker.latlng}
-                  title={marker.title}
-                  description={marker.description}
-              />
-          ))*/}
-        </MapView>
+      <MapView
+        initialRegion={{
+          latitude: localPos.latitude,
+          longitude: localPos.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        style={styles.container}
+      >
+        {velibContext.velibs.records.map((velib, index) => {
+          return (
+            <Marker
+              key={index}
+              coordinate = {{
+                latitude: velib.fields.geo[0],
+                longitude: velib.fields.geo[1],
+              }}>
+            </Marker>
+          )
+        })}
+      </MapView>
     </View>
   );
 }
