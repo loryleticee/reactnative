@@ -7,18 +7,18 @@ export const VelibContext = createContext({});
 
 export const VelibProvider = ({ children }) => {
     const [velibs, setVelibs] = useState([]);
+
     const RADIUS_DISTANCE = 1000;
-  /*  const pos = [48,86,
-        2,333333];
-*/
+
+    const getPosition = () => {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition((position) => {
+                resolve(position);
+            }, reject);
+        })
+    };
     const update = () => {
-        const getPosition = () => {
-            return new Promise((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    resolve(position);
-                }, reject);
-            })
-        };
+
 
         const fetchVelib = async () => {
             const position = await getPosition();
@@ -37,7 +37,7 @@ export const VelibProvider = ({ children }) => {
         return fetchVelib()
     };
 
-    useEffect(() =>{
+    useEffect(() => {
         update()
             .then(datas => {
                 setVelibs(datas)

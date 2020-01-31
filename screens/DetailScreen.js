@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 
 import {
     StyleSheet,
@@ -16,32 +16,51 @@ const DetailScreen = ({navigation}) =>{
     const context = useContext(VelibContext);
 
     const datas = navigation.getParam('data');
-    const lat = datas.geo[0];
-    const lgt = datas.geo[1];
+
+    const [localCoord, setLocalCoord] =  useState([]);
+
+    const initCoord = (props) => {
+      return  [props.geo[0], props.geo[1]];
+    };
+
+    console.log('GGHH', context.velibs.records);
+
+    useEffect(() =>{
+        setLocalCoord(initCoord(datas))
+    },[]) ;
 
     return (
         <>
-               <Text> {datas.station_name}</Text>
-                <MapView
-                    style={styles.container}
-                    region = { {
-                        latitude:lat ,
-                        longitude: lgt,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                    showsUserLocation={true}
-                    zoomEnabled={true}
-                    followsUserLocation={true}
-                >
+           <Text> {datas.station_name}</Text>
+            <MapView
+                style={styles.container}
+                region = {{
+                    latitude: localCoord[0] ? localCoord[0] : 0 ,
+                    longitude: localCoord[1] ? localCoord[1] : 0,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+                showsUserLocation={true}
+                zoomEnabled={true}
+                followsUserLocation={true}
+            >
                 <Marker
                     coordinate = {{
-                        latitude: lat,
-                        longitude: lgt,
+                        latitude: localCoord[0],
+                        longitude: localCoord[1],
                     }}>
-
                 </Marker>
-                </MapView>
+                {context.velibs.records.map((velib) => {
+                    return (
+                        <Marker
+                            coordinate = {{
+                                latitude: velib.fields.geo[0],
+                                longitude: velib.fields.geo[1],
+                            }}>
+                        </Marker>
+                    )
+                })}
+            </MapView>
 
         </>
     );
