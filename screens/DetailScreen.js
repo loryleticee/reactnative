@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React from 'react';
 
 import {
     StyleSheet,
@@ -10,23 +10,8 @@ import MapView, { Marker } from 'react-native-maps';
 import {VelibContext} from '../service/VelibProvider';
 
 const DetailScreen = ({navigation}) =>{
-
+    //Station informations
     const resort = navigation.getParam('resort');
-
-    const velibContext = useContext(VelibContext);
-    const localPos = velibContext.userPlace;
-
-    const [resortCoord, setResortCoord] =  useState([]);
-
-    const initResortCoord = (props) => {
-      return  { latitude :props.geo[0], longitude:props.geo[1]};
-    };
-
-    useEffect(() =>{
-      setResortCoord(initResortCoord(resort))
-    },[]) ;
-
-    console.log('KIII', resortCoord)
 
     return (
         <>
@@ -34,8 +19,8 @@ const DetailScreen = ({navigation}) =>{
             <MapView
                 style={styles.container}
                 region = {{
-                    latitude: localPos.latitude ,
-                    longitude: localPos.longitude,
+                    latitude: resort.geo[0]  ,
+                    longitude: resort.geo[1],
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
@@ -45,8 +30,8 @@ const DetailScreen = ({navigation}) =>{
             >
                 <Marker
                     coordinate = {{
-                        latitude: resortCoord.latitude,
-                        longitude: resortCoord.longitude,
+                        latitude: resort.geo[0],
+                        longitude: resort.geo[1],
                     }}>
                 </Marker>
             </MapView>

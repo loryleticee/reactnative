@@ -27,12 +27,6 @@ export default App;
 
 // vue recherche
 
-//details
-
 //modal (bloquant)
-
-//createContext ()
-
-//export createContext
 
 //usecontext()   OR <MyContext.consumer></MyContext.consumer>

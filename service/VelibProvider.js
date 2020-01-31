@@ -1,5 +1,4 @@
 import React,{useState, useEffect, createContext} from 'react';
-import {get} from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const url = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel';
 

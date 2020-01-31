@@ -18,6 +18,7 @@ export default function MapScreen() {
           longitudeDelta: 0.0421,
         }}
         style={styles.container}
+        showsUserLocation={true}
       >
         {velibContext.velibs.records.map((velib, index) => {
           return (

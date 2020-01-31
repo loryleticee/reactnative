@@ -31,7 +31,16 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "babel-preset-expo": "~8.0.0"
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "babel-jest": "^25.1.0",
+    "babel-preset-expo": "~8.0.0",
+    "i": "^0.3.6",
+    "jest": "^25.1.0",
+    "jest-expo": "^36.0.1",
+    "npm": "^6.13.7",
+    "or": "^0.2.0",
+    "react-test-renderer": "^16.12.0"
   },
   "private": true
 }
