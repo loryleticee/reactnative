@@ -6,7 +6,7 @@ import {VelibContext} from "../service/VelibProvider";
 export default function MapScreen() {
 
   const velibContext = useContext(VelibContext);
-  const localPos = velibContext.userPlace;
+  const localPos = velibContext.userLocation;
 
   return (
     <View style={styles.container}>

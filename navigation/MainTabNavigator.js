@@ -6,20 +6,20 @@ import MapScreen from '../screens/MapScreen';
 import DetailScreen from '../screens/DetailScreen';
 
 const ListStack = createStackNavigator(
-    {
-        Home: ListScreen,
-        Details: DetailScreen,
-    }
+  {
+      Home: ListScreen,
+      Details: DetailScreen,
+  }
 );
 
 ListStack.navigationOptions = {
-    tabBarLabel: 'List',
+  tabBarLabel: 'List',
 };
 
 const MapStack = createStackNavigator(
-    {
-        Links: MapScreen,
-    }
+  {
+      Links: MapScreen,
+  }
 );
 
 MapStack.navigationOptions = {

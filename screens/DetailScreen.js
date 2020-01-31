@@ -7,35 +7,33 @@ import {
 
 import MapView, { Marker } from 'react-native-maps';
 
-import {VelibContext} from '../service/VelibProvider';
-
 const DetailScreen = ({navigation}) =>{
     //Station informations
     const resort = navigation.getParam('resort');
 
     return (
-        <>
-           <Text> {resort.station_name}</Text>
-            <MapView
-                style={styles.container}
-                region = {{
-                    latitude: resort.geo[0]  ,
-                    longitude: resort.geo[1],
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-                showsUserLocation={true}
-                zoomEnabled={true}
-                followsUserLocation={true}
-            >
-                <Marker
-                    coordinate = {{
-                        latitude: resort.geo[0],
-                        longitude: resort.geo[1],
-                    }}>
-                </Marker>
-            </MapView>
-        </>
+      <>
+      <Text> {resort.station_name}</Text>
+      <MapView
+        style={styles.container}
+        region = {{
+            latitude: resort.geo[0]  ,
+            longitude: resort.geo[1],
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+        }}
+        showsUserLocation={true}
+        zoomEnabled={true}
+        followsUserLocation={true}
+      >
+      <Marker
+          coordinate = {{
+              latitude: resort.geo[0],
+              longitude: resort.geo[1],
+          }}>
+      </Marker>
+      </MapView>
+      </>
     );
 };
 
