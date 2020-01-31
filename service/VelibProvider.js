@@ -7,6 +7,7 @@ export const VelibContext = createContext({});
 
 export const VelibProvider = ({ children }) => {
     const [velibs, setVelibs] = useState([]);
+    const [userPlace, setUserPlace] = useState([]);
 
     const RADIUS_DISTANCE = 1000;
 
@@ -17,36 +18,37 @@ export const VelibProvider = ({ children }) => {
             }, reject);
         })
     };
-    const update = () => {
 
-
-        const fetchVelib = async () => {
+    const update = async () => {
             const position = await getPosition();
 
+            setUserPlace({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude
+              }
+            );
+
             const link = url + '&geofilter.distance='
-                + position.coords.latitude + ','
-                + position.coords.longitude + ','
-                + RADIUS_DISTANCE;
+              + position.coords.latitude + ','
+              + position.coords.longitude + ','
+              + RADIUS_DISTANCE;
 
             return fetch(link )
-                .then(response => response.json())
-                .then(data =>  data)
-                .catch((error) => console.log('ERROR fetch', error))
-        };
-
-        return fetchVelib()
+              .then(response => response.json())
+              .then(data =>  data)
+              .catch((error) => console.log('ERROR fetch', error))
     };
 
     useEffect(() => {
         update()
-            .then(datas => {
-                setVelibs(datas)
-            })
-            .catch((error) => console.log("ERROR IN USEFFECT: "+ error));
+        .then(datas => {
+          setVelibs(datas)
+        })
+        .catch((error) => console.log("ERROR IN USEFFECT(): "+ error));
     },[]);
 
     return (
-        <VelibContext.Provider value={{ velibs, update }}>
+        <VelibContext.Provider value={{ velibs, userPlace, update }}>
             {children}
         </VelibContext.Provider>
     );

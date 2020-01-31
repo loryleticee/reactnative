@@ -19,7 +19,7 @@ const ListScreen = (props) =>{
       renderItem={({ item }) => {
           return <Text onPress={() => {
               props.navigation.navigate('Details', {
-                  data: item.fields,
+                  resort: item.fields,
               });
           }}>{item.fields.station_name}</Text>
       }}
