@@ -18,8 +18,6 @@ export default function MapScreen() {
     setLocal(localPos)
   },[localPos]);
 
-console.log('SUCCES', local);
-
   return (
     <View style={styles.container}>
       <MapView

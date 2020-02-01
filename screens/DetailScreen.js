@@ -1,15 +1,19 @@
 import React, {useContext, useState, createContext, useEffect} from 'react';
 
 import {
-    StyleSheet,
-    Text,
-    Image,
-    View
-  ,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
 import {VelibContext} from "../service/VelibProvider";
+
+export const BuildContext = (favR) => {
+  return createContext(favR)
+};
 
 const DetailScreen = ({navigation}) =>{
     //Station informations
@@ -30,19 +34,14 @@ const DetailScreen = ({navigation}) =>{
     };
 
   /**
-   * @param object favResort
+   * @param  favR
    */
-
-  export const BuildContext = (favR) => {
-    createContext(favR)
-  };
 
   useEffect(() =>{
     if(favResort.length > 0) {
-     const FavContext = BuildContext(favResort)
+      BuildContext(favResort);
     }
-  });
-
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -69,22 +68,24 @@ const DetailScreen = ({navigation}) =>{
         }}>
       </Marker>
     </MapView>
-      <Image onPress={() => addFav(resort.station_code)} source={require('../assets/star.png')} />
+      <TouchableHighlight onPress={() => addFav(resort.station_code)}>
+        <Image source={require('../assets/star.png')} />
+      </TouchableHighlight>
     </View>
   );
 };
 
 DetailScreen.navigationOptions = {
-    title: "Vélibs",
+  title: "Vélibs",
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 0.5,
-        backgroundColor: '#fff',
-    },map: {
-        flex: 2,
-    },
+  container: {
+    flex: 0.5,
+    backgroundColor: '#fff',
+  },map: {
+    flex: 2,
+  },
 });
 
 export default DetailScreen;
