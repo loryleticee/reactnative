@@ -40,13 +40,14 @@ const DetailScreen = ({navigation}) =>{
         followsUserLocation={true}
       >
         <Marker
+          description = {resort.station_name}
           coordinate = {{
             latitude: resort.geo[0],
             longitude: resort.geo[1],
           }}>
         </Marker>
       </MapView>
-      <Text  onPress={() => addFav(resort.station_code)}> ⭐ </Text>
+      <Text onPress={() => addFav(resort.station_code)}> ⭐ </Text>
       </>
     );
 };

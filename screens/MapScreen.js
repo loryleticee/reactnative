@@ -23,6 +23,7 @@ export default function MapScreen() {
         {velibContext.velibs.records.map((velib, index) => {
           return (
             <Marker
+              description = {velib.fields.station_name}
               key={index}
               coordinate = {{
                 latitude: velib.fields.geo[0],
