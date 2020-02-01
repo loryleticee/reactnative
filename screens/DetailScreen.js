@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, createContext, useEffect} from 'react';
 
 import {
     StyleSheet,
@@ -18,43 +18,60 @@ const DetailScreen = ({navigation}) =>{
 
     const [favResort, setFavResort] = useState([]);
 
-    const addFav = (resortCode) => {
+  /**
+   * get the resort wich user choosen
+   * rerender
+   * @TODO DEPLACE IN A SERVICE BECAUSE WE WANT INIT A NEW RESORT ARRAY WITH VELIBS STATE INFORMATIONS
+   * @param resortCode
+   */
+  const addFav = (resortCode) => {
       const Resort = context.velibs.records.filter((item) => item.fields.station_code == resortCode);
       setFavResort(Resort);
     };
 
+  /**
+   * @param object favResort
+   */
+
+  export const BuildContext = (favR) => {
+    createContext(favR)
+  };
+
+  useEffect(() =>{
     if(favResort.length > 0) {
-
+     const FavContext = BuildContext(favResort)
     }
+  });
 
-    return (
-      <View style={styles.container}>
-      <Text> {resort.station_name}</Text>
-      <MapView
-        style={styles.map}
-        region = {{
-          latitude: resort.geo[0]  ,
+
+  return (
+    <View style={styles.container}>
+    <Text> {resort.station_name}</Text>
+    <MapView
+      style={styles.map}
+      region = {{
+        latitude: resort.geo[0]  ,
+        longitude: resort.geo[1],
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}
+      showsUserLocation={true}
+      zoomEnabled={true}
+      followsUserLocation={true}
+    >
+      <Marker
+        title={resort.station_name}
+        image={require('../assets/bike.png')}
+        description= {resort.nbbike.toString() +' / '+resort.maxbikeoverflow.toString()}
+        coordinate= {{
+          latitude: resort.geo[0],
           longitude: resort.geo[1],
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        showsUserLocation={true}
-        zoomEnabled={true}
-        followsUserLocation={true}
-      >
-        <Marker
-          title={resort.station_name}
-          image={require('../assets/bike.png')}
-          description= {resort.nbbike.toString() +' / '+resort.maxbikeoverflow.toString()}
-          coordinate= {{
-            latitude: resort.geo[0],
-            longitude: resort.geo[1],
-          }}>
-        </Marker>
-      </MapView>
-        <Image onPress={() => addFav(resort.station_code)} source={require('../assets/star.png')} />
-      </View>
-    );
+        }}>
+      </Marker>
+    </MapView>
+      <Image onPress={() => addFav(resort.station_code)} source={require('../assets/star.png')} />
+    </View>
+  );
 };
 
 DetailScreen.navigationOptions = {

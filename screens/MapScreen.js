@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import  MapView, {Marker} from "react-native-maps";
 import {VelibContext} from "../service/VelibProvider";
@@ -8,12 +8,24 @@ export default function MapScreen() {
   const velibContext = useContext(VelibContext);
   const localPos = velibContext.userLocation;
 
+  const [local, setLocal] = useState({
+      "latitude": 48.86,
+      "longitude": 2.333333,
+    }
+  ) ;
+
+  useEffect(() =>{
+    setLocal(localPos)
+  },[localPos]);
+
+console.log('SUCCES', local);
+
   return (
     <View style={styles.container}>
       <MapView
         initialRegion={{
-          latitude: localPos.latitude,
-          longitude: localPos.longitude,
+          latitude: local.latitude,
+          longitude: local.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -23,6 +35,11 @@ export default function MapScreen() {
         {velibContext.velibs.records.map((velib, index) => {
           return (
             <Marker
+              style={{
+                flex :1,
+                flexDirection : 'column',
+                alignSelf: 'center'
+              }}
               title={velib.fields.station_name}
               image={require('../assets/bike.png')}
               description= {velib.fields.nbbike.toString() +' / '+velib.fields.maxbikeoverflow.toString()}

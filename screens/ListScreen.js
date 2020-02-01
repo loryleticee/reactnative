@@ -6,10 +6,11 @@ import {
 } from 'react-native';
 
 import {VelibContext} from '../service/VelibProvider';
+import {FavContext} from '../screens/DetailScreen';
 
 const ListScreen = (props) =>{
   const context = useContext(VelibContext);
-
+  const favContext = useContext(FavContext);
   return (
     <FlatList
       style={styles.container}
