@@ -40,8 +40,10 @@ const DetailScreen = ({navigation}) =>{
         followsUserLocation={true}
       >
         <Marker
-          description = {resort.station_name}
-          coordinate = {{
+          title={resort.station_name}
+          image={require('../assets/bike.png')}
+          description= {resort.nbbike.toString() +' / '+resort.maxbikeoverflow.toString()}
+          coordinate= {{
             latitude: resort.geo[0],
             longitude: resort.geo[1],
           }}>
