@@ -3,6 +3,9 @@ import React, {useContext, useState} from 'react';
 import {
     StyleSheet,
     Text,
+    Image,
+    View
+  ,
 } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
@@ -25,10 +28,10 @@ const DetailScreen = ({navigation}) =>{
     }
 
     return (
-      <>
+      <View style={styles.container}>
       <Text> {resort.station_name}</Text>
       <MapView
-        style={styles.container}
+        style={styles.map}
         region = {{
           latitude: resort.geo[0]  ,
           longitude: resort.geo[1],
@@ -40,15 +43,17 @@ const DetailScreen = ({navigation}) =>{
         followsUserLocation={true}
       >
         <Marker
-          description = {resort.station_name}
-          coordinate = {{
+          title={resort.station_name}
+          image={require('../assets/bike.png')}
+          description= {resort.nbbike.toString() +' / '+resort.maxbikeoverflow.toString()}
+          coordinate= {{
             latitude: resort.geo[0],
             longitude: resort.geo[1],
           }}>
         </Marker>
       </MapView>
-      <Text onPress={() => addFav(resort.station_code)}> ⭐ </Text>
-      </>
+        <Image onPress={() => addFav(resort.station_code)} source={require('../assets/star.png')} />
+      </View>
     );
 };
 
@@ -60,6 +65,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 0.5,
         backgroundColor: '#fff',
+    },map: {
+        flex: 2,
     },
 });
 

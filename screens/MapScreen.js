@@ -23,7 +23,9 @@ export default function MapScreen() {
         {velibContext.velibs.records.map((velib, index) => {
           return (
             <Marker
-              description = {velib.fields.station_name}
+              title={velib.fields.station_name}
+              image={require('../assets/bike.png')}
+              description= {velib.fields.nbbike.toString() +' / '+velib.fields.maxbikeoverflow.toString()}
               key={index}
               coordinate = {{
                 latitude: velib.fields.geo[0],
