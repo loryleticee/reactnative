@@ -21,7 +21,6 @@ export default function MapScreen() {
         showsUserLocation={true}
       >
         {velibContext.velibs.records.map((velib, index) => {
-          console.log(velib.fields);
           return (
             <Marker
               title={velib.fields.station_name}
