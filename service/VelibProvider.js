@@ -45,6 +45,7 @@ export const VelibProvider = ({ children }) => {
     .catch((error) => console.log("ERROR IN USEFFECT(): "+ error));
   },[]);
 
+  
   return (
     <VelibContext.Provider value={{ velibs, userLocation, update }}>
         {children}
