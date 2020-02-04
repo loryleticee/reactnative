@@ -7,8 +7,37 @@ export const VelibContext = createContext({});
 export const VelibProvider = ({ children }) => {
   const [velibs, setVelibs] = useState([]);
   const [userLocation, setUserLocation] = useState([]);
+  const [velibsFavorites, setVelibFavorites] = useState([]);
 
   const RADIUS_DISTANCE = 1000;
+
+  const  addVelibToFav = (station) => {
+    let inArray = false;
+
+    velibsFavorites.map((item) =>{
+      if (velibsFavorites[i]["name"] === item.name) {
+
+        /*inArray = true;
+        break*/
+
+      }
+    });
+
+    if (inArray == false) {
+      setVelibFavorites([
+        ...velibsFavorites,
+        {
+          name: station.name,
+          geo: station.geo,
+          nbbike: station.nbbike,
+          nbebike: station.nbebike,
+          creditCard: station.creditCard,
+          dist: station.dist,
+          record_timestamp: station.date
+        }
+      ]);
+    }
+  }
 
   const getPosition = () => {
     return new Promise((resolve, reject) => {
@@ -47,7 +76,7 @@ export const VelibProvider = ({ children }) => {
 
   
   return (
-    <VelibContext.Provider value={{ velibs, userLocation, update }}>
+    <VelibContext.Provider value={{ velibs, userLocation, update, addVelibToFav }}>
         {children}
     </VelibContext.Provider>
   );
