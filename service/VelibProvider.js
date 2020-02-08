@@ -14,12 +14,10 @@ export const VelibProvider = ({ children }) => {
   const  addVelibToFav = (station) => {
     let inArray = false;
 
-    velibsFavorites.map((item) =>{
-      if (velibsFavorites[i]["name"] === item.name) {
-
-        /*inArray = true;
-        break*/
-
+    velibsFavorites.map((item, index) =>{
+      if (velibsFavorites[index]["name"] === item.name) {
+        inArray = true;
+        return false
       }
     });
 
