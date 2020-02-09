@@ -11,9 +11,10 @@ export const VelibProvider = ({ children }) => {
 
   const RADIUS_DISTANCE = 1000;
 
+  /*
   const  addVelibToFav = (station) => {
     let inArray = false;
-
+    console.log('SUCCES', station);
     velibsFavorites.map((item, index) =>{
       if (velibsFavorites[index]["name"] === item.name) {
         inArray = true;
@@ -35,7 +36,7 @@ export const VelibProvider = ({ children }) => {
         }
       ]);
     }
-  }
+  }*/
 
   const getPosition = () => {
     return new Promise((resolve, reject) => {
@@ -74,7 +75,7 @@ export const VelibProvider = ({ children }) => {
 
   
   return (
-    <VelibContext.Provider value={{ velibs, userLocation, update, addVelibToFav }}>
+    <VelibContext.Provider value={{ velibs, userLocation, update /*,addVelibToFav*/ }}>
         {children}
     </VelibContext.Provider>
   );
