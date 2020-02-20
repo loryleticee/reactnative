@@ -1,14 +1,41 @@
 import React,{useState, useEffect, createContext} from 'react';
-
-const url = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel';
+import { VELIB_API_URL } from "react-native-dotenv";
 
 export const VelibContext = createContext({});
 
 export const VelibProvider = ({ children }) => {
   const [velibs, setVelibs] = useState([]);
   const [userLocation, setUserLocation] = useState([]);
+  const [velibsFavorites, setVelibFavorites] = useState([]);
 
   const RADIUS_DISTANCE = 1000;
+
+
+  const  addVelibToFav = (station) => {
+    let inArray = false;
+    console.log('SUCCES', station);
+    velibsFavorites.map((item, index) =>{
+      if (velibsFavorites[index]["name"] === item.name) {
+        inArray = true;
+        return false
+      }
+    });
+
+    if (inArray == false) {
+      setVelibFavorites([
+        ...velibsFavorites,
+        {
+          name: station.name,
+          geo: station.geo,
+          nbbike: station.nbbike,
+          nbebike: station.nbebike,
+          creditCard: station.creditCard,
+          dist: station.dist,
+          record_timestamp: station.date
+        }
+      ]);
+    }
+  }
 
   const getPosition = () => {
     return new Promise((resolve, reject) => {
@@ -27,7 +54,7 @@ export const VelibProvider = ({ children }) => {
       }
     );
 
-    const link = url + '&rows=200&geofilter.distance='
+    const link = VELIB_API_URL + '&rows=200&geofilter.distance='
       + position.coords.latitude + ','
       + position.coords.longitude + ','
       + RADIUS_DISTANCE;
@@ -47,7 +74,7 @@ export const VelibProvider = ({ children }) => {
 
   
   return (
-    <VelibContext.Provider value={{ velibs, userLocation, update }}>
+    <VelibContext.Provider value={{ velibs, userLocation, update, addVelibToFav }}>
         {children}
     </VelibContext.Provider>
   );
