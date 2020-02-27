@@ -40,7 +40,7 @@ export default function MapScreen() {
               }}
               title={velib.fields.station_name}
               image={require('../assets/bike.png')}
-              description= {velib.fields.nbbike.toString() +' / '+velib.fields.maxbikeoverflow.toString()}
+              description= {velib.fields.nbbike.toString() +' / '+velib.fields.nbbikeoverflow}
               key={index}
               coordinate = {{
                 latitude: velib.fields.geo[0],

@@ -61,7 +61,7 @@ const DetailScreen = ({navigation}) =>{
       <Marker
         title={resort.station_name}
         image={require('../assets/bike.png')}
-        description= {resort.nbbike.toString() +' / '+resort.maxbikeoverflow.toString()}
+        description= {resort.nbbike.toString() +' / '+resort.nbbikeoverflow}
         coordinate= {{
           latitude: resort.geo[0],
           longitude: resort.geo[1],
